@@ -5,10 +5,47 @@ let firstCard, secondCard;
 let cards = [];
 let matchedPairs = 0;
 
+let score = 0;
+let gameEnded = false;
+
+let startingMinutes = 1;
+let startingSeconds = startingMinutes * 60 + 30;
+let time = document.querySelector(".time");
+
 async function getCards() {
     const response = await fetch('./cards/cards_data.json');
     const jsonData = await response.json();
     cards = [...jsonData, ...jsonData];
+}
+
+function startTimer() {
+    setInterval(() => {
+        startingSeconds--;
+        let minutes = Math.floor(startingSeconds / 60);
+        let seconds = startingSeconds % 60;
+        time.innerHTML = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+        if (startingSeconds == 0) {
+            clearInterval();
+            if (!gameEnded) {
+                gameEnded = true;
+                alert("Time's up!");
+                location.reload();
+            }
+        }
+        if (matchedPairs == cards.length / 2) {
+            clearInterval();
+            if (!gameEnded) {
+                gameEnded = true;
+                let timeLeft = time.innerHTML.split(":");
+                let minutes = parseInt(timeLeft[0]);
+                let seconds = parseInt(timeLeft[1]);
+                let timeLeftInSeconds = minutes * 60 + seconds;
+                score += timeLeftInSeconds / 10;
+                alert("You won! Your score is " + score + "!");
+                location.reload();
+            }
+        }
+    }, 1000);
 }
 
 function hideCards() {
@@ -62,6 +99,8 @@ function checkMatch() {
             secondCard.removeEventListener('click', flipCard);
             resetBoard();
             matchedPairs++;
+            score += 5;
+            console.log(score);
         } else {
             setTimeout(() => {
                 firstCard.querySelector("img").src = "./cards/back.png";
@@ -69,6 +108,8 @@ function checkMatch() {
                 firstCard.classList.remove("flip");
                 secondCard.classList.remove("flip");
                 resetBoard();
+                score -= 1;
+                console.log(score);
             }, 1000);
         }
     }
@@ -85,5 +126,6 @@ btnStart.addEventListener('click', function () {
     getCards().then(() => {
         createCardsAndShuffle();
         hideCards();
+        startTimer();
     });
 });
