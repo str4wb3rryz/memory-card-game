@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "url": "./cards/card_images/americano.jpg",
+        "name": "americano"
+    },
+    {
+        "id": 2,
+        "url": "./cards/card_images/cappuccino.jpg",
+        "name": "cappuccino"
+    },
+    {
+        "id": 3,
+        "url": "./cards/card_images/cortado.jpg",
+        "name": "cortado"
+    },
+    {
+        "id": 4,
+        "url": "./cards/card_images/frappe.jpg",
+        "name": "frappe"
+    },
+    {
+        "id": 5,
+        "url": "./cards/card_images/irish.jpg",
+        "name": "irish"
+    },
+    {
+        "id": 6,
+        "url": "./cards/card_images/latte_macchiato.jpg",
+        "name": "latte_macchiato"
+    },
+    {
+        "id": 7,
+        "url": "./cards/card_images/marocchino.jpg",
+        "name": "marocchino"
+    },
+    {
+        "id": 8,
+        "url": "./cards/card_images/mocha.jpg",
+        "name": "mocha"
+    }
+]
