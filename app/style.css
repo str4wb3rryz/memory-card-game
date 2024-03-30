@@ -36,9 +36,19 @@ h1 {
     width: 4.5rem;
 }
 
+.front {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card.flip .front {
+    transform: rotateY(180deg);
+}
+
 .card img {
     width: 100%;
     height: auto;
+    backface-visibility: hidden;
 }
 
 body>footer {

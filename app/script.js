@@ -68,8 +68,10 @@ function createCardsAndShuffle() {
         card.setAttribute("data-name", c.name);
         card.setAttribute("data-id", c.id);
         card.innerHTML = `
-            <div class="image">
-                <img src="./${c.url}" alt="${c.name}">
+            <div class="front">
+                <div class="front-image">
+                    <img src="./${c.url}" alt="${c.name}">
+                </div>
             </div>
             `;
         gameBoard.appendChild(card);
@@ -83,7 +85,9 @@ function flipCard() {
     let cardId = this.getAttribute("data-id");
     let getCard = cards.find((c) => c.id == cardId);
     let cardImg = this.querySelector("img");
-    cardImg.src = `./${getCard.url}`;
+    setTimeout(() => {
+        cardImg.src = `./${getCard.url}`;
+    }, 150);
     if (!firstCard) {
         firstCard = this;
     } else {
@@ -103,13 +107,15 @@ function checkMatch() {
             console.log(score);
         } else {
             setTimeout(() => {
-                firstCard.querySelector("img").src = "./cards/back.png";
-                secondCard.querySelector("img").src = "./cards/back.png";
                 firstCard.classList.remove("flip");
                 secondCard.classList.remove("flip");
-                resetBoard();
-                score -= 1;
-                console.log(score);
+                setTimeout(() => {
+                    firstCard.querySelector("img").src = "./cards/back.png";
+                    secondCard.querySelector("img").src = "./cards/back.png";
+                    resetBoard();
+                    score -= 1;
+                    console.log(score);
+                }, 150);
             }, 1000);
         }
     }
